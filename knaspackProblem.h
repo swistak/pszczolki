@@ -2,31 +2,7 @@
 #ifndef __KNASPACK_P_H__
 #define __KNASPACK_P_H__
 
-#include "common.h"
-
-
-
-///Element z plecaka. Mozna bylo to lepiej zrobic bez seterow. ale nie moglem wtedy alokowac tablicy w klasie KnaspackProblem 
-///To mozna poprawic ale trzeba sie douczyc. Jak alokowac pamiec dla elementow bez domyslnego konstruktora przy uzyciu operatora new.
-///Klasa zawiera dwa pola i reperezentuje element ktory mozna zabrac. Posiada informacje o jego wadze oraz cenie calkowitej.
-class Element{
-
-private:
-	double weight;	
-	double price;
-
-	void setWeight(double A_weight);
-	void setPrice(double A_price);
-
-public:
-	
-	Element(double A_weight=0., double A_price=0.);
-	double getWeight();
-	double getPrice();
-	string toString();
-	friend class KnaspackProblem;
-};
-
+#include "element.h"
 
 ///KnaspackProblem klasa ktora reprezentuje konkretny problem plecakowy. 
 /// Konstruktor inicjalizuje problem zadana jako argument iloscia elementow. Podane sa takze jako argumenty
@@ -64,7 +40,7 @@ class KnaspackProblem{
 	double dynamicSolution(double ** elementy, double rozmiarPlecaka);
 
 	//funkcja ma tworzyc stringa, ale na razie wypisuje na konsole.
-	void toString();
+	string toString();
 	//d-or
 	~KnaspackProblem();
 };

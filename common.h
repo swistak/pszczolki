@@ -1,4 +1,34 @@
+/*! \mainpage My Personal Index Page
+ *
+ * \section Program BoxBeeCol
 
+version 1.2 2010
+
+Badania operacyjne
+ *
+ * \section Instalacja
+
+Program nie wymaga instalacji. Nalezy jedynie skompilowac kod zrodlowy programu wykonujac 
+plik Makefile poleceniem make.
+
+Program mozna uruchomic wywolujac komende 
+make run
+lub plik wykonywalny otrzymywany w czasie kompilacji
+
+ * \subsection step1 Step 1: Opening the box
+ *  
+ * etc...
+ */
+
+/** \file file.h
+ * A brief file description.
+ * A more elaborated file description.
+ */
+
+/**
+ * A global integer value.
+ * More details about this value.
+ */
 
 #ifndef __COMMON_H__
 #define __COMMON_H__
@@ -17,24 +47,6 @@
 #define DEBUG false //jaki tryb pracy programu: normalny czy debugowania  DEBUG={true,false}
 #define INV false //INVESTIGATE
 
-
-/** \defgroup errors Obsługa błędów
-      \code
-      #include "errors.h"
-      \endcode
-      Moduł zawiera funkcje i definicje odpowiedzialne za obsługę błędów,
-zgłaszanych przez inne moduły oprogramowania, związane z działaniem
-aplikacji. \n
-...
-*/
-/*@{*/
 using namespace std;
-
-string doublToStr(double number);
-void printTable(int * t, int size);
-void printTable(double * t, int size);
-
-/*@}*/
-
 
 #endif

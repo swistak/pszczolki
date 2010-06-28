@@ -93,7 +93,7 @@ class BeeStatus{
 			swapIndex2=0;
 			addedIndex=0;
 			removedIndex=0;
-			int status=0;
+			//int status=0;
 		}
 		bool success;
 		enum beeMission whatTheyDid;
