@@ -30,7 +30,7 @@ double Element::getPrice() {
 
 string Element::toString() {
   std::ostringstream strs;
-  strs << "{" << weight << ", " << price << "}";
+  strs << "{" << weight << ", " << price << ", " << price/weight <<"}";
   
   return strs.str();
 }

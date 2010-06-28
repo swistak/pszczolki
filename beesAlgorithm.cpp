@@ -356,9 +356,9 @@ double KnaspackProblemSolutinUsingBeeAlgorithm(double BagSize, KnaspackProblem &
   if (DEBUG)cout << "ALGORYTM PSZCZELI" << endl;
 
   for (iteration = 0; iteration < countOfIteration; iteration++) {
-    //	if(0 == iteration ){
-    //	 cout << iteration << "% \r" << endl;
-    //	}
+    if(iteration % 10 == 9 ){
+      
+    }
 
     //zerowanie zmiennych:
     bestSkautPrice = bestPrice;

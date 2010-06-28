@@ -27,7 +27,7 @@ public:
 	Element(double A_weight=0., double A_price=0.);
 	double getWeight();
 	double getPrice();
-	string toString();
+	std::string toString();
 	friend class KnaspackProblem;
 };
 

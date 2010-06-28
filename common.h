@@ -33,9 +33,15 @@ lub plik wykonywalny otrzymywany w czasie kompilacji
 #ifndef __COMMON_H__
 #define __COMMON_H__
 
+#define DEBUG false //jaki tryb pracy programu: normalny czy debugowania  DEBUG={true,false}
+#define INV false //INVESTIGATE
+
+using namespace std;
+
 #include <string>
 #include <iostream>
 #include <sstream>
+
 
 #include <stdlib.h>
 #include <time.h>
@@ -44,9 +50,7 @@ lub plik wykonywalny otrzymywany w czasie kompilacji
 #include <unistd.h> //sleep usleep
 #include <limits.h>
 
-#define DEBUG false //jaki tryb pracy programu: normalny czy debugowania  DEBUG={true,false}
-#define INV false //INVESTIGATE
-
-using namespace std;
+#include "ctype.h"
+#include "window.h"
 
 #endif

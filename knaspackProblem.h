@@ -25,17 +25,11 @@ public:
     Element getElementAt(int index);
     int getCountOfElements();
 
-    //sortowanie po cenie jednostkowej
-    void sortByUnitPrice();
-    //posortowanie elementow po cenie
-    void sortByPrice();
     //znalezienie rozwiazania metoda zachlanna sortowanie po cenie jednostkowej.
-    double getBetterBruteForceValue(double BagSize);
-    //rozwiazanie metoda zachlanna. Sortowanie po cenie jednostkowej
-    double getBruteForceValue(double BagSize);
-
+    double getAproximatedValue(double BagSize);
+    
     //funkcja ma tworzyc stringa, ale na razie wypisuje na konsole.
-    string toString();
+    std::string toString();
     //d-or
     ~KnaspackProblem();
 };

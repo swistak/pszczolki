@@ -1,8 +1,8 @@
 #include "knaspackProblem.h"
 #include "element.h"
+#include <algorithm>
 
 KnaspackProblem::KnaspackProblem(int A_countOfElements, double maxWeight, double maxPrice) : countOfElements(A_countOfElements) {
-
   elem = new Element[countOfElements];
   for (int i = 0; i < countOfElements; i++) {
     elem[i].setWeight(((double) rand()) / ((double) RAND_MAX) * maxWeight);
@@ -22,77 +22,17 @@ int KnaspackProblem::getCountOfElements() {
   return countOfElements;
 }
 
-//sortowanie po cenie jednostkowej
-
-void KnaspackProblem::sortByUnitPrice() {
-
-  Element tempE;
-  double maxUnitPrice = 0.;
-  int IndexOfMax;
-
-  for (int i = 0; i < countOfElements; i++) {
-    maxUnitPrice = 0.;
-    for (int j = i; j < countOfElements; j++) {
-      if (elem[j].getWeight() == 0) {
-        throw string("ERROR: Zerowa masa elementu, a nie mozna dzielic przez zero. Uruchom program jeszcze raz.");
-      }
-      if ((elem[j].getPrice() / elem[j].getWeight()) > maxUnitPrice) {
-        maxUnitPrice = (elem[j].getPrice() / elem[j].getWeight());
-        IndexOfMax = j;
-      }
-    }
-    tempE = elem[i];
-    elem[i] = elem[IndexOfMax];
-    elem[IndexOfMax] = tempE;
-  }
+// Return whether first element is greater than the second
+bool UnitPriceGreater ( Element elem1, Element elem2 ) {
+   return((elem1.getPrice() / elem1.getWeight()) > (elem2.getPrice() / elem2.getWeight()));
 }
-//posortowanie elementow po cenie
 
-void KnaspackProblem::sortByPrice() {
-
-  Element tempE;
-  double maxPrice = 0.;
-  int IndexOfMax;
-  for (int i = 0; i < countOfElements; i++) {
-    maxPrice = 0.;
-    for (int j = i; j < countOfElements; j++) {
-      if (elem[j].getPrice() > maxPrice) {
-        maxPrice = elem[j].getPrice();
-        IndexOfMax = j;
-      }
-    }
-    tempE = elem[i];
-    elem[i] = elem[IndexOfMax];
-    elem[IndexOfMax] = tempE;
-  }
-
-}
-//znalezienie rozwiazania metoda zachlanna sortowanie po cenie jednostkowej.
-
-double KnaspackProblem::getBetterBruteForceValue(double BagSize) {
-
+double KnaspackProblem::getAproximatedValue(double BagSize) {
   double currWeight = 0.;
   double myPrice = 0.;
   //int index = 0;
-  sortByUnitPrice();
-  for (int i = 0; i < countOfElements; i++) {
-    if ((elem[i].getWeight() + currWeight) <= BagSize) { //jezeli element sie zmiesci to go dokladamy:))
-      currWeight += elem[i].getWeight();
-      myPrice += elem[i].getPrice();
-      //cout << "Dodaje=" << elem[i].toString()<<". ";
-    }
-  }
-  return myPrice;
-}
+  std::sort(elem, elem + countOfElements, UnitPriceGreater);
 
-//rozwiazanie metoda zachlanna. Sortowanie po cenie jednostkowej
-
-double KnaspackProblem::getBruteForceValue(double BagSize) {
-
-  double currWeight = 0.;
-  double myPrice = 0.;
-  //int index = 0;
-  sortByPrice();
   for (int i = 0; i < countOfElements; i++) {
     if ((elem[i].getWeight() + currWeight) <= BagSize) { //jezeli element sie zmiesci to go dokladamy:))
       currWeight += elem[i].getWeight();
@@ -103,10 +43,9 @@ double KnaspackProblem::getBruteForceValue(double BagSize) {
 }
 
 //funkcja ma tworzyc stringa, ale na razie wypisuje na konsole.
-
 string KnaspackProblem::toString() {
   std::ostringstream result;
-  result << "W znajduja sie (waga, cena)" << endl;
+  result << "W domie znajduja sie (waga, cena)" << endl;
   for (int i = 0; i < countOfElements; i++) {
     result << "{" << elem[i].getWeight() << ", " << elem[i].getPrice() << "}" << endl;
   }
