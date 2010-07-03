@@ -101,8 +101,9 @@ public:
     int WorkerBeens;
     int A_counOfIteration;
 
-    window* mainWindow;
-
+    Ui::window widget;
+    BackgroundBee * bb;
+    
     KnapsackProblemBee(int A_countOfElements, double maxWeight, double maxPrice);
 
     BeeStatus beeFly(int * indTab, double A_BagSize, int LimitIndex, beeMission whatToDo);

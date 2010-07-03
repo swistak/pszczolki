@@ -167,7 +167,7 @@
           <number>10</number>
          </property>
          <property name="value">
-          <number>10</number>
+          <number>100</number>
          </property>
         </widget>
        </item>
@@ -223,9 +223,15 @@
        </item>
        <item row="13" column="1">
         <widget class="QLineEdit" name="resultAprox">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
-           <width>70</width>
+           <width>80</width>
            <height>16777215</height>
           </size>
          </property>
@@ -240,9 +246,15 @@
        </item>
        <item row="14" column="1">
         <widget class="QLineEdit" name="resultBee">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
-           <width>70</width>
+           <width>80</width>
            <height>16777215</height>
           </size>
          </property>
@@ -251,7 +263,14 @@
        <item row="12" column="0">
         <widget class="QLabel" name="label_10">
          <property name="text">
-          <string>Wyniki dla algorytmu</string>
+          <string>Wyniki dla</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="1">
+        <widget class="QLabel" name="label_11">
+         <property name="text">
+          <string>algorytmu</string>
          </property>
         </widget>
        </item>
@@ -307,7 +326,11 @@
      <widget class="QWidget" name="widget" native="true">
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QwtPlot" name="qwtPlot"/>
+        <widget class="QwtPlot" name="qwtPlot">
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

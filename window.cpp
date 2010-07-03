@@ -10,55 +10,73 @@
 #include "window.h"
 #include "common.h"
 #include "BackgroundBee.h"
+#include "qwt-qt4/qwt_plot.h"
 
+QString d2s(double d);
 
 window::window() {
   widget.setupUi(this);
   connect(widget.startButton, SIGNAL(clicked()), this, SLOT(startClicked()));
+  connect(widget.stopButton, SIGNAL(clicked()), this, SLOT(stopClicked()));
+  setupGraph();
+  working = false;
+  stoping = false;
 }
 
 window::~window() {
-  if(bb) {
+  if (bb) {
     delete bb;
   }
 }
 
-QString d2s(double d) {
-  std::ostringstream strs;
-  strs << d;
-  return (QString(strs.str().data()));
-}
-
 void window::startClicked() {
-  int maxWeight = widget.KMaxWeight->value();
-  int maxPrice = widget.KMaxPrice->value();
-  int numberOfItems = widget.KNumberOfItems->value();
-
-  KnapsackProblemBee k1(numberOfItems, maxWeight, maxPrice);
-  k1.SkautBeens = widget.BSkauts->value();
-  k1.WorkerBeens = widget.BWorkers->value();
-  k1.A_counOfIteration = widget.BIterations->value();
-
-  Element element;
-
-  for (int y = 0; y < k1.getCountOfElements(); y++) {
-    if (!widget.problem->item(y, 0)) {
-      int lastRow = widget.problem->rowCount();
-      widget.problem->insertRow(lastRow);
-    }
-
-    element = k1.getElementAt(y);
-    QTableWidgetItem *newItem = new QTableWidgetItem(d2s(element.getPrice()));
-    widget.problem->setItem(y, 0, newItem);
-    newItem = new QTableWidgetItem(d2s(element.getWeight()));
-    widget.problem->setItem(y, 1, newItem);
-  }
+  if (working) return;
+  working = true;
 
   widget.progressBar->setMaximum(widget.BIterations->value());
 
-  
-  cout << "1";
+  widget.startButton->setEnabled(false);
+  widget.stopButton->setEnabled(true);
+
+  bb = new BackgroundBee(widget);
+  QObject::connect(bb, SIGNAL(finishedIteration(int, int)), this, SLOT(updateProgress(int, int)));
+  QObject::connect(bb, SIGNAL(finishedWorking(double, double)), this, SLOT(updateResults(double, double)));
+
+  widget.qwtPlot->removeData();
+
   bb -> start();
 }
 
-void window::stopClicked() { }
+void window::stopClicked() {
+  if (!working) return;
+  stoping = true; working = false;
+  bb -> stopWorking();
+}
+
+void window::setupGraph() {
+  widget.qwtPlot->setTitle(QString::fromUtf8("Efektywność algorytmu pszczelego"));
+
+  // Show the axes
+  widget.qwtPlot->setAxisTitle(widget.qwtPlot->xBottom, "Iteracje");
+  widget.qwtPlot->setAxisTitle(widget.qwtPlot->yLeft, QString::fromUtf8("Wartość plecaka"));
+
+  widget.qwtPlot->maxX = 100;
+  widget.qwtPlot->maxY = 100;
+  widget.qwtPlot->resizeIfNeeded(200, 200);
+
+  // Show the plots
+  widget.qwtPlot->replot();
+}
+
+void window::updateProgress(int currentProgress, int currentPrice) {
+  widget.progressBar->setValue(currentProgress + 1);
+
+  widget.qwtPlot->appendData(currentProgress, currentPrice);
+}
+
+void window::updateResults(double aprox, double bee) {
+  widget.resultAprox->setText(d2s(aprox));
+  widget.resultBee->setText(d2s(bee));
+  widget.startButton->setEnabled(true);
+  widget.stopButton->setEnabled(false);
+}

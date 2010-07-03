@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'window.h'
 **
-** Created: Sat Jul 3 02:39:45 2010
+** Created: Sat Jul 3 04:56:43 2010
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_window[] = {
        4,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -33,12 +33,17 @@ static const uint qt_meta_data_window[] = {
  // slots: signature, parameters, type, tag, flags
        8,    7,    7,    7, 0x0a,
       23,    7,    7,    7, 0x0a,
+      66,   37,    7,    7, 0x0a,
+     100,   90,    7,    7, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_window[] = {
     "window\0\0startClicked()\0stopClicked()\0"
+    "currentProgress,currentPrice\0"
+    "updateProgress(int,int)\0aprox,bee\0"
+    "updateResults(double,double)\0"
 };
 
 const QMetaObject window::staticMetaObject = {
@@ -72,9 +77,11 @@ int window::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         switch (_id) {
         case 0: startClicked(); break;
         case 1: stopClicked(); break;
+        case 2: updateProgress((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 3: updateResults((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2]))); break;
         default: ;
         }
-        _id -= 2;
+        _id -= 4;
     }
     return _id;
 }

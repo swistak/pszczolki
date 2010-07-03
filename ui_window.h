@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'window.ui'
 **
-** Created: Fri Jul 2 22:42:01 2010
+** Created: Sat Jul 3 04:13:38 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -31,7 +31,8 @@
 #include <QtGui/QTableWidget>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
-#include <qwt-qt4/qwt_plot.h>
+#include "qwt_plot.h"
+#include "incrementalplot.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -66,6 +67,7 @@ public:
     QLabel *label_9;
     QLineEdit *resultBee;
     QLabel *label_10;
+    QLabel *label_11;
     QWidget *widget_3;
     QVBoxLayout *verticalLayout;
     QTableWidget *problem;
@@ -73,7 +75,7 @@ public:
     QPlainTextEdit *console;
     QWidget *widget;
     QVBoxLayout *verticalLayout_2;
-    QwtPlot *qwtPlot;
+    IncrementalPlot *qwtPlot;
     QMenuBar *menubar;
     QMenu *menuStart;
     QStatusBar *statusbar;
@@ -180,7 +182,7 @@ public:
         BIterations->setObjectName(QString::fromUtf8("BIterations"));
         BIterations->setMaximum(9999);
         BIterations->setSingleStep(10);
-        BIterations->setValue(10);
+        BIterations->setValue(100);
 
         formLayout->setWidget(7, QFormLayout::FieldRole, BIterations);
 
@@ -210,7 +212,8 @@ public:
 
         resultAprox = new QLineEdit(widget_2);
         resultAprox->setObjectName(QString::fromUtf8("resultAprox"));
-        resultAprox->setMaximumSize(QSize(70, 16777215));
+        resultAprox->setMinimumSize(QSize(80, 0));
+        resultAprox->setMaximumSize(QSize(80, 16777215));
 
         formLayout->setWidget(13, QFormLayout::FieldRole, resultAprox);
 
@@ -221,7 +224,8 @@ public:
 
         resultBee = new QLineEdit(widget_2);
         resultBee->setObjectName(QString::fromUtf8("resultBee"));
-        resultBee->setMaximumSize(QSize(70, 16777215));
+        resultBee->setMinimumSize(QSize(80, 0));
+        resultBee->setMaximumSize(QSize(80, 16777215));
 
         formLayout->setWidget(14, QFormLayout::FieldRole, resultBee);
 
@@ -229,6 +233,11 @@ public:
         label_10->setObjectName(QString::fromUtf8("label_10"));
 
         formLayout->setWidget(12, QFormLayout::LabelRole, label_10);
+
+        label_11 = new QLabel(widget_2);
+        label_11->setObjectName(QString::fromUtf8("label_11"));
+
+        formLayout->setWidget(12, QFormLayout::FieldRole, label_11);
 
 
         horizontalLayout->addWidget(widget_2);
@@ -269,8 +278,9 @@ public:
         widget->setObjectName(QString::fromUtf8("widget"));
         verticalLayout_2 = new QVBoxLayout(widget);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        qwtPlot = new QwtPlot(widget);
+        qwtPlot = new IncrementalPlot(widget);
         qwtPlot->setObjectName(QString::fromUtf8("qwtPlot"));
+        qwtPlot->setFrameShape(QFrame::NoFrame);
 
         verticalLayout_2->addWidget(qwtPlot);
 
@@ -316,7 +326,8 @@ public:
         stopButton->setText(QApplication::translate("window", "Stop", 0, QApplication::UnicodeUTF8));
         label_7->setText(QApplication::translate("window", "aproksymacyjnego", 0, QApplication::UnicodeUTF8));
         label_9->setText(QApplication::translate("window", "pszczelego", 0, QApplication::UnicodeUTF8));
-        label_10->setText(QApplication::translate("window", "Wyniki dla algorytmu", 0, QApplication::UnicodeUTF8));
+        label_10->setText(QApplication::translate("window", "Wyniki dla", 0, QApplication::UnicodeUTF8));
+        label_11->setText(QApplication::translate("window", "algorytmu", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem = problem->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("window", "Cena", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem1 = problem->horizontalHeaderItem(1);

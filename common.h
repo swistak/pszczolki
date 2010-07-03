@@ -54,6 +54,7 @@ using namespace std;
 
 #include <qt4/Qt/qthread.h>
 
+
 #include "window.h"
 
 #endif

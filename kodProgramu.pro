@@ -4,10 +4,10 @@
 
 TEMPLATE = app
 INCLUDEPATH += /usr/include/qwt-qt4
-INCLUDE += qwt-qt4
+LIBS += -lqwt-qt4
 
 # Input
-HEADERS += beesAlgorithm.h common.h element.h knapsackProblem.h ui_window.h window.h BackgroundBee.h
+HEADERS += beesAlgorithm.h common.h element.h knapsackProblem.h ui_window.h window.h BackgroundBee.h incrementalplot.h
 INTERFACES += window.ui
-SOURCES += beesAlgorithm.cpp element.cpp knapsackProblem.cpp start.cpp window.cpp BackgroundBee.cpp
+SOURCES += beesAlgorithm.cpp element.cpp knapsackProblem.cpp start.cpp window.cpp BackgroundBee.cpp incrementalplot.cpp
 CONFIG += thread

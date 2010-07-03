@@ -56,6 +56,7 @@ Mozna zrobic: podzielic ladnie plik na naglowki, pliki biblioteczne, napisac Mak
 
 
 #include "beesAlgorithm.h"
+#include "BackgroundBee.h"
 
 ///getIndexRand funkcja tworzy tablice z permutacja liczb od 0 do size: [0;size] i zwraca wskaznik do niej.
 
@@ -356,10 +357,6 @@ double KnapsackProblemBee::getBeeValue(double BagSize) {
   if (DEBUG)cout << "ALGORYTM PSZCZELI" << endl;
 
   for (iteration = 0; iteration < countOfIteration; iteration++) {
-    if (iteration % 10 == 9) {
-
-    }
-
     //zerowanie zmiennych:
     bestSkautPrice = bestPrice;
     bestSkautIndex = bestPositionIndex;
@@ -477,24 +474,21 @@ double KnapsackProblemBee::getBeeValue(double BagSize) {
 
       //if(sprawdzenieElementow(e, bestPosition,bs[bestWorkerBee].indexLimit)!=bestWeight){throw string("ERROR 5: Niezgodna wartosc wagi");};
     }
-    //cout <<"Debug A.10"<<endl;
-    //cout << "Dzialanie algorytmu pszczelego: bestPrice="<<bestPrice <<" bPI:" << bestPositionIndex << " tW:"<< tempWeight << endl;
-    //zapamietanie zmiennej dla najwyzszej wartosci wartosci plecaka.
-    cout << selectedBee;
+    
     delete[] bs;
-  }
-  //cout << A_counOfIteration << "\tskauci="<<  SkautBeens<< "\tpracownice="<< WorkerBeens;
-  //cout << "\tPRICE=" << bestPrice << "\tWeight="<< bestWeight<<"\tL.Elemntow=" << bestPositionIndex<<endl;
 
-  /*
-  if(sprawdzenieElementow(e,bestPosition, bestPositionIndex) !=bestWeight){
-          throw string("Error 2: Niezgodna wartosc wagi: ");
+    if (bb->nextIteration(iteration, bestPrice)) {
+      delete[] bestPosition;
+      return bestPrice;
+    }
   }
-   */
+  
   delete[] bestPosition;
   return bestPrice;
 }
 
-KnapsackProblemBee::KnapsackProblemBee(int A_countOfElements, double maxWeight, double maxPrice) : KnapsackProblem(A_countOfElements, maxWeight, maxPrice) { }
+KnapsackProblemBee::KnapsackProblemBee(int A_countOfElements, double maxWeight, double maxPrice) : KnapsackProblem(A_countOfElements, maxWeight, maxPrice) { 
+  
+}
 
 KnapsackProblemBee::~KnapsackProblemBee() { }
