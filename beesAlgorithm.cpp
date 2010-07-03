@@ -72,11 +72,9 @@ int * KnapsackProblemBee::getIndexRand(int size) {
   for (int i = 0; i < 10 * size; i++) {
     toChange1 = i % size;
     toChange2 = rand() % size;
-    //cout << toChange1 <<" "<< toChange2 << endl;
     temp = wsk[toChange2];
     wsk[toChange2] = wsk[toChange1];
     wsk[toChange1] = temp;
-    //cout << wsk[toChange1] <<" "<< wsk[toChange2] << endl;
   }
   return wsk;
 }
@@ -94,11 +92,9 @@ double KnapsackProblemBee::sprawdzenieElementow(int *bestPosition, int bestPosit
   for (int i = 0; i < bestPositionIndex; i++) {
     tempW = getElementAt(bestPosition[i]).getWeight();
     tempP = getElementAt(bestPosition[i]).getPrice();
-    //cout << tempW << " " << tempP << endl;//", e=" << e.getElementAt(bestPosition[i]).toString << endl;
     sumW += tempW;
     sumP += tempP;
   }
-  //cout << "SPRAWDZENIE: W=" << sumW << ", PRICE=" << sumP << endl;
   return sumW;
 }
 
@@ -109,7 +105,6 @@ double KnapsackProblemBee::calculateSkautValue(int * indTab, double A_BagSize, i
 
   double currWeight = 0.;
   double myPrice = 0.;
-  //cout << "bag size: " << A_BagSize<<endl;
 
   int index = 0;
 
@@ -117,8 +112,6 @@ double KnapsackProblemBee::calculateSkautValue(int * indTab, double A_BagSize, i
   while (index < getCountOfElements() && ((currWeight + getElementAt(indTab[index]).getWeight()) <= A_BagSize)) {
     currWeight += getElementAt(indTab[index]).getWeight();
     myPrice += getElementAt(indTab[index]).getPrice();
-    //cout <<"\t\tIteracja:"<<index<<" ("<<indTab[index] <<") +Elem:="<<e.getElementAt(indTab[index]).toString() <<endl;
-    //cout<< " "<<indTab[index] << ": "<< e.getElementAt(indTab[index]).getWeight()<<" " << e.getElementAt(indTab[index]).getPrice() <<endl;
     index++;
   }
   LastIndex = index;
@@ -168,7 +161,6 @@ BeeStatus KnapsackProblemBee::beeFly(int * indTab, double A_BagSize, int LimitIn
 
   double temp;
   BeeStatus bb;
-  //cout <<"Debug BF.1"<<endl;
 
   if (LimitIndex < 2) {
     bb.Price = 0.;
@@ -185,59 +177,39 @@ BeeStatus KnapsackProblemBee::beeFly(int * indTab, double A_BagSize, int LimitIn
   }
   //e.toString();
   bb.whatTheyDid = whatToDo;
-  //cout <<"Debug BF.2"<<endl;
   switch (whatToDo) {
 
     case CHANGE:
       //dla kazdej pszczoly losujemy nowe elementy do wymiany.
-      //cout <<"Debug BF.CH.1"<<endl;
       bb.indexLimit = LimitIndex;
       bb.status = 1;
-      //cout <<"Debug BF.CH.1.1"<<endl;
-      //cout <<"limitIndex "<< LimitIndex <<endl;
       bb.swapIndex1 = rand() % LimitIndex; //zeby zamieniac element, ktory jest w zbiorze wybranych juz:))
-      //cout <<"Debug BF.CH.1.2"<<endl;
       bb.swapIndex2 = rand() % (eCountOfElements - LimitIndex) + LimitIndex;
-      //cout <<"Debug BF.CH.1.3"<<endl;
       //robimy swapa:
-      //cout <<"Debug BF.CH.1.4"<<endl;
       temp = tab[bb.swapIndex1];
       tab[bb.swapIndex1] = tab[bb.swapIndex2];
       tab[bb.swapIndex2] = temp;
-      //cout <<"Debug BF.CH.1.5"<<endl;
       /////////
-      //cout <<"Debug BF.CH.1.6"<<endl;
       bb.Price = calculateValue(tab, LimitIndex, A_BagSize, tempWeight, zmiesciSie);
-      //cout <<"Debug BF.CH.1.7"<<endl;
       bb.success = zmiesciSie;
       bb.Weight = tempWeight;
-      //cout <<"Debug BF.CH.2"<<endl;
       //jesli sie nie zmiesci to lipa:
       if (!bb.success) {
-        //cout <<"Debug BF.CH.3"<<endl;
         bb.status = 0;
         bb.Price = 0.;
-        //cout <<"Debug BF.CH.4"<<endl;
       } else {
         //sprobuj dodac:
-        //cout <<"Debug BF.CH.5"<<endl;
         bb.addedIndex = rand() % (eCountOfElements - LimitIndex) + LimitIndex; //losujemy z reszty
-        //cout <<"Debug BF.CH.6"<<endl;
         if ((tempWeight + getElementAt(tab[bb.addedIndex]).getWeight()) <= A_BagSize) {
-          //cout <<"Debug BF.CH.7"<<endl;
           bb.Price += getElementAt(tab[bb.addedIndex]).getPrice();
           bb.Weight += getElementAt(tab[bb.addedIndex]).getWeight();
           bb.status = 2;
           bb.indexLimit = LimitIndex + 1; //limit zwiekszamy o jeden //ale to chyba nie ma sensu
-          //cout <<"Debug BF.CH.8"<<endl;
         }
       }
-      //cout <<"Debug BF.CH.9"<<endl;
       break;
     case SUB:
-      //cout <<"Debug SUB.3"<<endl;
 
-      //cout <<"Debug SUB.4"<<endl;
       //wywalamy element z listy
       bb.indexLimit = LimitIndex - 1;
       bb.status = 4;
@@ -248,7 +220,6 @@ BeeStatus KnapsackProblemBee::beeFly(int * indTab, double A_BagSize, int LimitIn
       for (int i = bb.removedIndex; i < LimitIndex; i++) {
         tab[i] = tab[i + 1];
       }
-      //cout <<"Debug SUB.5"<<endl;
       tab[LimitIndex] = temp;
 
       //robimy zamiane!!!
@@ -257,13 +228,11 @@ BeeStatus KnapsackProblemBee::beeFly(int * indTab, double A_BagSize, int LimitIn
       bb.swapIndex1 = (rand() % bb.indexLimit); //zeby zamieniac element, ktory jest w zbiorze wybranych juz:))
 
       bb.swapIndex2 = rand() % (eCountOfElements - bb.indexLimit) + bb.indexLimit;
-      //cout <<"Debug SUB.6"<<endl;
       //robimy swapa:
       temp = tab[bb.swapIndex1];
       tab[bb.swapIndex1] = tab[bb.swapIndex2];
       tab[bb.swapIndex2] = temp;
       /////////
-      //cout <<"Debug SUB.7"<<endl;
       bb.Price = calculateValue(tab, bb.indexLimit, A_BagSize, tempWeight, zmiesciSie);
 
       bb.Weight = tempWeight;
@@ -275,12 +244,10 @@ BeeStatus KnapsackProblemBee::beeFly(int * indTab, double A_BagSize, int LimitIn
         bb.Price = 0.;
         bb.status = 4;
       }
-      //cout <<"Debug SUB.8"<<endl;
       break;
     default:
       break;
   }
-  //cout <<"Debug BF.3"<<endl;
   if (DEBUG && bb.success) {
     cout << "**************" << endl;
     cout << "IN FUNC BeeFly: , W=" << bb.Weight << ", P=" << bb.Price << ", status=" << bb.status << ", Index= " << bb.indexLimit;
@@ -288,7 +255,6 @@ BeeStatus KnapsackProblemBee::beeFly(int * indTab, double A_BagSize, int LimitIn
     sprawdzenieElementow(tab, bb.indexLimit);
     cout << "**************" << endl;
   }
-  //cout <<"Debug BF.4"<<endl;
   delete[] tab;
   return bb;
 }
@@ -333,7 +299,6 @@ double KnapsackProblemBee::getBeeValue(double BagSize) {
   double bestWeight = 0.;
   int * bestPosition = new int[eCountOfElements];
   int bestPositionIndex = 0; //liczba elementow
-  //cout <<"Debug A.1"<<endl;
   //skauci:
   int * localSkautPosition; // wskaznik dla lokalnej pozycji skautow
   int localSkautIndex = 0; //liczba elementow wybranych
@@ -382,9 +347,6 @@ double KnapsackProblemBee::getBeeValue(double BagSize) {
         bestPrice = bestSkautPrice = tempPrice;
         bestPositionIndex = bestSkautIndex = localSkautIndex;
         bestWeight = bestSkautWeight = localSkautWeight;
-        //cout << i <<" skaut znalazl cos lepszego!:)"<<endl;
-        //cout << "bestSkautIndex =" << bestSkautIndex << endl;
-        //cout << "bestSkautPrice ="  << bestSkautPrice << endl;
       }
 
     }
@@ -411,7 +373,6 @@ double KnapsackProblemBee::getBeeValue(double BagSize) {
     tempPrice = bestPrice;
     for (int i = 0; i < COUNT_WORKER; i++) {
       if (bs[i].Price > tempPrice) {
-        //cout << "Najlepsza robotnica: "<< i<< ", workerPrice[i]= "<<workerPrice[i] << ", wczesniejsza=" << tempPrice<<endl;
         tempPrice = bs[i].Price;
         bestWorkerBee = i;
       }
