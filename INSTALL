@@ -1,0 +1,8 @@
+Uruchamianie programu wymaga bibliotek qt4 oraz qwt-qt4
+
+Kompilacja wymaga tych samych bibliotek w wersjach deweloperskich, oraz narzędzia qmake (opcjonalnie)
+
+qmake (opcjonalnie)
+make
+./pszczolki
+
