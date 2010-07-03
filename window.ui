@@ -326,7 +326,7 @@
      <widget class="QWidget" name="widget" native="true">
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QwtPlot" name="qwtPlot">
+        <widget class="IncrementalPlot" name="qwtPlot">
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
          </property>
@@ -357,9 +357,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QwtPlot</class>
-   <extends>QFrame</extends>
-   <header>qwt_plot.h</header>
+   <class>IncrementalPlot</class>
+   <extends>QwtPlot</extends>
+   <header>incrementalplot.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

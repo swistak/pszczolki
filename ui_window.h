@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'window.ui'
 **
-** Created: Sat Jul 3 04:13:38 2010
+** Created: Sat Jul 3 05:12:49 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -31,7 +31,6 @@
 #include <QtGui/QTableWidget>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
-#include "qwt_plot.h"
 #include "incrementalplot.h"
 
 QT_BEGIN_NAMESPACE
