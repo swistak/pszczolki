@@ -1,3 +1,6 @@
 *.o
 start
 *~
+html
+latex
+nbproject

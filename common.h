@@ -51,6 +51,9 @@ using namespace std;
 #include <limits.h>
 
 #include "ctype.h"
+
+#include <qt4/Qt/qthread.h>
+
 #include "window.h"
 
 #endif

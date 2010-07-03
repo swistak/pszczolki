@@ -9,9 +9,12 @@
 #define	_WINDOW_H
 
 #include "ui_window.h"
+#include "BackgroundBee.h"
 
 class window : public QMainWindow {
     Q_OBJECT
+
+    BackgroundBee * bb;
 public:
     window();
     virtual ~window();

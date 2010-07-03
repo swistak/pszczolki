@@ -5,17 +5,23 @@
  * Created on 28 czerwiec 2010, 16:20
  */
 
+#include "knapsackProblem.h"
+#include "beesAlgorithm.h"
 #include "window.h"
 #include "common.h"
-#include "knaspackProblem.h"
-#include "beesAlgorithm.h"
+#include "BackgroundBee.h"
+
 
 window::window() {
   widget.setupUi(this);
   connect(widget.startButton, SIGNAL(clicked()), this, SLOT(startClicked()));
 }
 
-window::~window() { }
+window::~window() {
+  if(bb) {
+    delete bb;
+  }
+}
 
 QString d2s(double d) {
   std::ostringstream strs;
@@ -24,16 +30,16 @@ QString d2s(double d) {
 }
 
 void window::startClicked() {
-  int bagSize = widget.KBagSize->value();
   int maxWeight = widget.KMaxWeight->value();
   int maxPrice = widget.KMaxPrice->value();
   int numberOfItems = widget.KNumberOfItems->value();
 
-  KnaspackProblem k1(numberOfItems, maxWeight, maxPrice);
+  KnapsackProblemBee k1(numberOfItems, maxWeight, maxPrice);
+  k1.SkautBeens = widget.BSkauts->value();
+  k1.WorkerBeens = widget.BWorkers->value();
+  k1.A_counOfIteration = widget.BIterations->value();
 
-  double result;
   Element element;
-    QString text;
 
   for (int y = 0; y < k1.getCountOfElements(); y++) {
     if (!widget.problem->item(y, 0)) {
@@ -50,24 +56,9 @@ void window::startClicked() {
 
   widget.progressBar->setMaximum(widget.BIterations->value());
 
-  try {
-    result = KnaspackProblemSolutinUsingBeeAlgorithm(bagSize,
-                                            k1,
-                                            widget.BSkauts->value(),
-                                            widget.BWorkers->value(),
-                                            widget.BIterations->value()
-                                            );
-
-    text = d2s(result);
-    widget.resultBee->setText(text);
-    
-    result = k1.getAproximatedValue(bagSize);
-    text = d2s(result);
-    widget.resultAprox->setText(text);
-  } catch (string &e) {
-    text = e.data();
-    widget.console->appendPlainText(text);
-  }
+  
+  cout << "1";
+  bb -> start();
 }
 
 void window::stopClicked() { }

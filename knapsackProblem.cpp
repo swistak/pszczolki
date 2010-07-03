@@ -1,8 +1,8 @@
-#include "knaspackProblem.h"
+#include "knapsackProblem.h"
 #include "element.h"
 #include <algorithm>
 
-KnaspackProblem::KnaspackProblem(int A_countOfElements, double maxWeight, double maxPrice) : countOfElements(A_countOfElements) {
+KnapsackProblem::KnapsackProblem(int A_countOfElements, double maxWeight, double maxPrice) : countOfElements(A_countOfElements) {
   elem = new Element[countOfElements];
   for (int i = 0; i < countOfElements; i++) {
     elem[i].setWeight(((double) rand()) / ((double) RAND_MAX) * maxWeight);
@@ -11,14 +11,14 @@ KnaspackProblem::KnaspackProblem(int A_countOfElements, double maxWeight, double
   }
 }
 
-Element KnaspackProblem::getElementAt(int index) {
+Element KnapsackProblem::getElementAt(int index) {
   if ((index < 0) & (index >= countOfElements)) {
     throw string("ERROR: Nieprawidlowe odowlanie sie do indeksu elementu");
   }
   return elem[index];
 }
 
-int KnaspackProblem::getCountOfElements() {
+int KnapsackProblem::getCountOfElements() {
   return countOfElements;
 }
 
@@ -27,7 +27,7 @@ bool UnitPriceGreater ( Element elem1, Element elem2 ) {
    return((elem1.getPrice() / elem1.getWeight()) > (elem2.getPrice() / elem2.getWeight()));
 }
 
-double KnaspackProblem::getAproximatedValue(double BagSize) {
+double KnapsackProblem::getAproximatedValue(double BagSize) {
   double currWeight = 0.;
   double myPrice = 0.;
   //int index = 0;
@@ -43,7 +43,7 @@ double KnaspackProblem::getAproximatedValue(double BagSize) {
 }
 
 //funkcja ma tworzyc stringa, ale na razie wypisuje na konsole.
-string KnaspackProblem::toString() {
+string KnapsackProblem::toString() {
   std::ostringstream result;
   result << "W domie znajduja sie (waga, cena)" << endl;
   for (int i = 0; i < countOfElements; i++) {
@@ -53,10 +53,10 @@ string KnaspackProblem::toString() {
 }
 //d-or
 
-KnaspackProblem::~KnaspackProblem() {
+KnapsackProblem::~KnapsackProblem() {
   delete[] elem;
 }
 
 
-//end file knaspackProblem.cpp
+//end file knapsackProblem.cpp
 

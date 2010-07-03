@@ -12,7 +12,7 @@
  Komentarze:
 ================================================================================
 Tresc dla programu doxygen
-@file name: KnaspackProblem_beesAlgorithm.cpp
+@file name: KnapsackProblem_beesAlgorithm.cpp
 @date: 2010-05-05, 2010-05-13
 @autor: Sebastian Kupny skupny@gmail.com
 
@@ -22,28 +22,28 @@ Na samym dole jest main.
 W main jest wywolana funkcja test
 w test wykonywane sa wszystkie obliczenia.
 
-Ciebie interesuje jedynie funkcja o oryginalnej nazwie: KnaspackProblemSolutinUsingBeeAlgorithm, opisana jest ponizej:
+Ciebie interesuje jedynie funkcja o oryginalnej nazwie: KnapsackProblemSolutinUsingBeeAlgorithm, opisana jest ponizej:
 -------------------------------------------------------
 
 Description:
 functions:
-double KnaspackProblemSolutinUsingBeeAlgorithm(double BagSize, KnaspackProblem &e,int SkautBeens, int WorkerBeens, int A_counOfIteration){
+double KnapsackProblemSolutinUsingBeeAlgorithm(double BagSize, KnapsackProblem &e,int SkautBeens, int WorkerBeens, int A_counOfIteration){
 Funkcja ta kompleksowo rozwiazuje problem plecakowy uzywajac algorytmu pszczelego
 
 paraterers:
     gdzie poszczegolne parametry to:
     -BagSize - rozmiar plecaka. Maksymalny rozmiar plecaka ograniczajacy wage elementow.
-    -KnaspackProblem e - struktura danych przechowujaca informacje o liczbie elementow do wyboru oraz te elementy. Mozesz o niej poczytac (ale kod i komentarze) niestety dokumentacja w tworzeniu. Na jej rzecz mozna wywolac funkcje, ktora znajdzie zachlanne rozwiazanie problemu. Do zaadaptowania jest algorytm dynamiczny
+    -KnapsackProblem e - struktura danych przechowujaca informacje o liczbie elementow do wyboru oraz te elementy. Mozesz o niej poczytac (ale kod i komentarze) niestety dokumentacja w tworzeniu. Na jej rzecz mozna wywolac funkcje, ktora znajdzie zachlanne rozwiazanie problemu. Do zaadaptowania jest algorytm dynamiczny
     -SkautBeens - liczba skautow, ze wzgledu na ich odmienna funkcje podaje sie jako parametr.
     -WorkerBeens - liczba robotnic.
     -A_counOfIteration - liczba iteracji w jakich znajdowane bedzie optymalne rozwiazanie.
 
 returns:
     Funkcja zwraca maksymalna osiagnieta wartosc a dla niej zapamietana w kodzie jest kombinacja wybranych elementow.
-    Mozna ja odczytac, ale nalezy zrobic to z poziomu tej funkcji KnaspackProblemSolutinUsingBeeAlgorithm.
+    Mozna ja odczytac, ale nalezy zrobic to z poziomu tej funkcji KnapsackProblemSolutinUsingBeeAlgorithm.
 Usage:
     W zaleznosci od danych wejsciowych mozna badac otrzymane z funkcji wyniki. Do ustalania parametrow problemu plecakowego nalezy uzyc
-    klasy KnaspackProblem
+    klasy KnapsackProblem
 
 Compile:
         >g++ beesAlgorithm.cpp  -o beesAlgorithm.x
@@ -59,7 +59,7 @@ Mozna zrobic: podzielic ladnie plik na naglowki, pliki biblioteczne, napisac Mak
 
 ///getIndexRand funkcja tworzy tablice z permutacja liczb od 0 do size: [0;size] i zwraca wskaznik do niej.
 
-int * getIndexRand(int size) {
+int * KnapsackProblemBee::getIndexRand(int size) {
 
   int temp = 0;
   ;
@@ -85,14 +85,14 @@ int * getIndexRand(int size) {
 ///wskaznik do tablicy z wybranymi indeksami oraz liczbe wybranych indeksow/elementow.
 ///zwraca mase wybranych elementow. Nie porownuje jej z masa dozwolona.
 
-double sprawdzenieElementow(KnaspackProblem &e, int *bestPosition, int bestPositionIndex) {
+double KnapsackProblemBee::sprawdzenieElementow(int *bestPosition, int bestPositionIndex) {
   double tempW = 0.;
   double tempP = 0.;
   double sumW = 0.;
   double sumP = 0.;
   for (int i = 0; i < bestPositionIndex; i++) {
-    tempW = e.getElementAt(bestPosition[i]).getWeight();
-    tempP = e.getElementAt(bestPosition[i]).getPrice();
+    tempW = getElementAt(bestPosition[i]).getWeight();
+    tempP = getElementAt(bestPosition[i]).getPrice();
     //cout << tempW << " " << tempP << endl;//", e=" << e.getElementAt(bestPosition[i]).toString << endl;
     sumW += tempW;
     sumP += tempP;
@@ -104,7 +104,7 @@ double sprawdzenieElementow(KnaspackProblem &e, int *bestPosition, int bestPosit
 ///funkcja oblicza dla danej tablicy o zadanym rozmiarze wartosc przchowywana w plecaku.
 ///jako parametr nalezy przekazac problem, tablice z indeksami wybranych elementow oraz rozmiar tablicy z indeksami.
 
-double calculateSkautValue(KnaspackProblem &e, int * indTab, double A_BagSize, int &LastIndex, double &TotalWeight) {
+double KnapsackProblemBee::calculateSkautValue(int * indTab, double A_BagSize, int &LastIndex, double &TotalWeight) {
 
   double currWeight = 0.;
   double myPrice = 0.;
@@ -113,9 +113,9 @@ double calculateSkautValue(KnaspackProblem &e, int * indTab, double A_BagSize, i
   int index = 0;
 
   //	e.toString();
-  while (index < e.getCountOfElements() && ((currWeight + e.getElementAt(indTab[index]).getWeight()) <= A_BagSize)) {
-    currWeight += e.getElementAt(indTab[index]).getWeight();
-    myPrice += e.getElementAt(indTab[index]).getPrice();
+  while (index < getCountOfElements() && ((currWeight + getElementAt(indTab[index]).getWeight()) <= A_BagSize)) {
+    currWeight += getElementAt(indTab[index]).getWeight();
+    myPrice += getElementAt(indTab[index]).getPrice();
     //cout <<"\t\tIteracja:"<<index<<" ("<<indTab[index] <<") +Elem:="<<e.getElementAt(indTab[index]).toString() <<endl;
     //cout<< " "<<indTab[index] << ": "<< e.getElementAt(indTab[index]).getWeight()<<" " << e.getElementAt(indTab[index]).getPrice() <<endl;
     index++;
@@ -129,20 +129,20 @@ double calculateSkautValue(KnaspackProblem &e, int * indTab, double A_BagSize, i
 ///funkcja oblicza cene oraz ciezar elementow wybranych. Ich indeksy sa w tablicy indTab, liczba wybranych to A_limit.
 /// Ponadto zwraca parametry: A_possible jezeli rozmiar plecaka (A_BagSize) zostal przekroczony.
 
-double calculateValue(KnaspackProblem &e, int * indTab, int A_limit, double A_BagSize, double &TotalWeight, bool &A_possible) {
+double KnapsackProblemBee::calculateValue(int * indTab, int A_limit, double A_BagSize, double &TotalWeight, bool &A_possible) {
 
   double currWeight = 0.;
   double myPrice = 0.;
   A_possible = false;
   //	e.toString();
   for (int i = 0; i < A_limit; i++) {
-    currWeight += e.getElementAt(indTab[i]).getWeight();
-    myPrice += e.getElementAt(indTab[i]).getPrice();
+    currWeight += getElementAt(indTab[i]).getWeight();
+    myPrice += getElementAt(indTab[i]).getPrice();
   }
 
   if (DEBUG) {
     cout << "#W calculateValue:==";
-    sprawdzenieElementow(e, indTab, A_limit);
+    sprawdzenieElementow(indTab, A_limit);
   }
   if (currWeight <= A_BagSize) {
 
@@ -158,7 +158,7 @@ double calculateValue(KnaspackProblem &e, int * indTab, int A_limit, double A_Ba
 
 };
 
-BeeStatus beeFly(KnaspackProblem &e, int * indTab, double A_BagSize, int LimitIndex, beeMission whatToDo) {
+BeeStatus KnapsackProblemBee::beeFly(int * indTab, double A_BagSize, int LimitIndex, beeMission whatToDo) {
 
   //bool success  = false;
   double tempWeight = 0;
@@ -176,7 +176,7 @@ BeeStatus beeFly(KnaspackProblem &e, int * indTab, double A_BagSize, int LimitIn
     bb.success = false;
     return bb;
   }
-  int eCountOfElements = e.getCountOfElements();
+  int eCountOfElements = getCountOfElements();
   int * tab = new int[eCountOfElements];
 
   for (int i = 0; i < eCountOfElements; i++) {
@@ -206,7 +206,7 @@ BeeStatus beeFly(KnaspackProblem &e, int * indTab, double A_BagSize, int LimitIn
       //cout <<"Debug BF.CH.1.5"<<endl;
       /////////
       //cout <<"Debug BF.CH.1.6"<<endl;
-      bb.Price = calculateValue(e, tab, LimitIndex, A_BagSize, tempWeight, zmiesciSie);
+      bb.Price = calculateValue(tab, LimitIndex, A_BagSize, tempWeight, zmiesciSie);
       //cout <<"Debug BF.CH.1.7"<<endl;
       bb.success = zmiesciSie;
       bb.Weight = tempWeight;
@@ -222,10 +222,10 @@ BeeStatus beeFly(KnaspackProblem &e, int * indTab, double A_BagSize, int LimitIn
         //cout <<"Debug BF.CH.5"<<endl;
         bb.addedIndex = rand() % (eCountOfElements - LimitIndex) + LimitIndex; //losujemy z reszty
         //cout <<"Debug BF.CH.6"<<endl;
-        if ((tempWeight + e.getElementAt(tab[bb.addedIndex]).getWeight()) <= A_BagSize) {
+        if ((tempWeight + getElementAt(tab[bb.addedIndex]).getWeight()) <= A_BagSize) {
           //cout <<"Debug BF.CH.7"<<endl;
-          bb.Price += e.getElementAt(tab[bb.addedIndex]).getPrice();
-          bb.Weight += e.getElementAt(tab[bb.addedIndex]).getWeight();
+          bb.Price += getElementAt(tab[bb.addedIndex]).getPrice();
+          bb.Weight += getElementAt(tab[bb.addedIndex]).getWeight();
           bb.status = 2;
           bb.indexLimit = LimitIndex + 1; //limit zwiekszamy o jeden //ale to chyba nie ma sensu
           //cout <<"Debug BF.CH.8"<<endl;
@@ -263,7 +263,7 @@ BeeStatus beeFly(KnaspackProblem &e, int * indTab, double A_BagSize, int LimitIn
       tab[bb.swapIndex2] = temp;
       /////////
       //cout <<"Debug SUB.7"<<endl;
-      bb.Price = calculateValue(e, tab, bb.indexLimit, A_BagSize, tempWeight, zmiesciSie);
+      bb.Price = calculateValue(tab, bb.indexLimit, A_BagSize, tempWeight, zmiesciSie);
 
       bb.Weight = tempWeight;
       bb.success = zmiesciSie;
@@ -284,7 +284,7 @@ BeeStatus beeFly(KnaspackProblem &e, int * indTab, double A_BagSize, int LimitIn
     cout << "**************" << endl;
     cout << "IN FUNC BeeFly: , W=" << bb.Weight << ", P=" << bb.Price << ", status=" << bb.status << ", Index= " << bb.indexLimit;
     cout << ", (LimitIndex=" << LimitIndex << " )" << endl;
-    sprawdzenieElementow(e, tab, bb.indexLimit);
+    sprawdzenieElementow(tab, bb.indexLimit);
     cout << "**************" << endl;
   }
   //cout <<"Debug BF.4"<<endl;
@@ -292,7 +292,7 @@ BeeStatus beeFly(KnaspackProblem &e, int * indTab, double A_BagSize, int LimitIn
   return bb;
 }
 
-bool tableIsOK(int * tab, int size) {
+bool KnapsackProblemBee::tableIsOK(int * tab, int size) {
 
   bool ok = true;
   //inicjalizacja:
@@ -319,14 +319,14 @@ bool tableIsOK(int * tab, int size) {
   return ok;
 }
 
-double KnaspackProblemSolutinUsingBeeAlgorithm(double BagSize, KnaspackProblem &e, int SkautBeens, int WorkerBeens, int A_counOfIteration) {
+double KnapsackProblemBee::getBeeValue(double BagSize) {
 
   int iteration = 0; //iterator numer iteracji
   int countOfIteration = A_counOfIteration; //liczba zadanych iteracji
   int COUNT_SKAUT = SkautBeens; //liczba skautow
   int COUNT_WORKER = WorkerBeens; //liczba pracownic
 
-  int eCountOfElements = e.getCountOfElements(); //liczba elementow w problemie plecakowym
+  int eCountOfElements = getCountOfElements(); //liczba elementow w problemie plecakowym
   if (eCountOfElements == 0) throw string("ERROR: nie ma elementow do wyboru");
   double bestPrice = 0.; //wynik osiagniety przez algorytm
   double bestWeight = 0.;
@@ -356,8 +356,8 @@ double KnaspackProblemSolutinUsingBeeAlgorithm(double BagSize, KnaspackProblem &
   if (DEBUG)cout << "ALGORYTM PSZCZELI" << endl;
 
   for (iteration = 0; iteration < countOfIteration; iteration++) {
-    if(iteration % 10 == 9 ){
-      
+    if (iteration % 10 == 9) {
+
     }
 
     //zerowanie zmiennych:
@@ -372,7 +372,7 @@ double KnaspackProblemSolutinUsingBeeAlgorithm(double BagSize, KnaspackProblem &
 
       localSkautPosition = getIndexRand(eCountOfElements); //NOWY TEREN
 
-      tempPrice = calculateSkautValue(e, localSkautPosition, BagSize, localSkautIndex, localSkautWeight);
+      tempPrice = calculateSkautValue(localSkautPosition, BagSize, localSkautIndex, localSkautWeight);
 
       if (tempPrice > bestSkautPrice) {
         if (INV)cout << "SKAUT " << i << " ZNALAZŁ COŚ LEPSZEGO (W=" << localSkautWeight << " PRICE=" << tempPrice << ")," << endl;
@@ -401,11 +401,11 @@ double KnaspackProblemSolutinUsingBeeAlgorithm(double BagSize, KnaspackProblem &
 
 
     for (int i = 0; i < COUNT_WORKER; i++) {
-      //BeeStatus beeFly(KnaspackProblem &e, int * indTab, double A_BagSize, int LimitIndex,beeDest whatToDo){
+      //BeeStatus beeFly(KnapsackProblem &e, int * indTab, double A_BagSize, int LimitIndex,beeDest whatToDo){
       if (rand() % 2 == 1) tempOrder = CHANGE;
       else tempOrder = SUB;
       //e.toString();
-      bs[i] = beeFly(e, bestPosition, BagSize, bestSkautIndex, tempOrder);
+      bs[i] = beeFly(bestPosition, BagSize, bestSkautIndex, tempOrder);
 
     }
 
@@ -495,5 +495,6 @@ double KnaspackProblemSolutinUsingBeeAlgorithm(double BagSize, KnaspackProblem &
   return bestPrice;
 }
 
+KnapsackProblemBee::KnapsackProblemBee(int A_countOfElements, double maxWeight, double maxPrice) : KnapsackProblem(A_countOfElements, maxWeight, maxPrice) { }
 
-
+KnapsackProblemBee::~KnapsackProblemBee() { }

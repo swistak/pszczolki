@@ -10,7 +10,7 @@
 
 #include "common.h"
 
-///Element z plecaka. Mozna bylo to lepiej zrobic bez seterow. ale nie moglem wtedy alokowac tablicy w klasie KnaspackProblem
+///Element z plecaka. Mozna bylo to lepiej zrobic bez seterow. ale nie moglem wtedy alokowac tablicy w klasie KnapsackProblem
 ///To mozna poprawic ale trzeba sie douczyc. Jak alokowac pamiec dla elementow bez domyslnego konstruktora przy uzyciu operatora new.
 ///Klasa zawiera dwa pola i reperezentuje element ktory mozna zabrac. Posiada informacje o jego wadze oraz cenie calkowitej.
 class Element{
@@ -28,7 +28,7 @@ public:
 	double getWeight();
 	double getPrice();
 	std::string toString();
-	friend class KnaspackProblem;
+	friend class KnapsackProblem;
 };
 
 

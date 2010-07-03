@@ -4,7 +4,7 @@
 
 #include "element.h"
 
-///KnaspackProblem klasa ktora reprezentuje konkretny problem plecakowy. 
+///KnapsackProblem klasa ktora reprezentuje konkretny problem plecakowy. 
 /// Konstruktor inicjalizuje problem zadana jako argument iloscia elementow. Podane sa takze jako argumenty
 /// konstruktora  maksymalna cena oraz maksymalna waga elementu. Ktory moze sie w nim znalezc.
 /// Klasa inicjalizuje elementy wartosciami losowymi o rozkladzie "jednostajnym" na ile pozwala metoda rand.
@@ -13,14 +13,14 @@
 /// Zakomentowane sa fragmenty kodu dzialajacego pierwotnie na tablicach. Podejscie obiektowe ma jednak wygodniejsza forme i 
 /// zostanie tutaj uzyte. Mam nadzieje ze uchroni przed bledami ktore czesto pojawiaja sie przy uzywaniu tablic.
 
-class KnaspackProblem {
+class KnapsackProblem {
 private:
     int countOfElements;
     //double  ** elements;	//waga = elements[x][0], cena = elements[x][1] <- KONWENCJA
     Element * elem;
 public:
     //k-or
-    KnaspackProblem(int A_countOfElements, double maxWeight, double maxPrice);
+    KnapsackProblem(int A_countOfElements, double maxWeight, double maxPrice);
 
     Element getElementAt(int index);
     int getCountOfElements();
@@ -31,7 +31,7 @@ public:
     //funkcja ma tworzyc stringa, ale na razie wypisuje na konsole.
     std::string toString();
     //d-or
-    ~KnaspackProblem();
+    ~KnapsackProblem();
 };
 
 

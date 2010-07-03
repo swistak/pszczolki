@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'window.ui'
 **
-** Created: Mon Jun 28 23:49:37 2010
+** Created: Fri Jul 2 22:42:01 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -15,7 +15,6 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QFormLayout>
-#include <QtGui/QGraphicsView>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
@@ -32,6 +31,7 @@
 #include <QtGui/QTableWidget>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
+#include <qwt-qt4/qwt_plot.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -65,6 +65,7 @@ public:
     QLineEdit *resultAprox;
     QLabel *label_9;
     QLineEdit *resultBee;
+    QLabel *label_10;
     QWidget *widget_3;
     QVBoxLayout *verticalLayout;
     QTableWidget *problem;
@@ -72,7 +73,7 @@ public:
     QPlainTextEdit *console;
     QWidget *widget;
     QVBoxLayout *verticalLayout_2;
-    QGraphicsView *graphicsView;
+    QwtPlot *qwtPlot;
     QMenuBar *menubar;
     QMenu *menuStart;
     QStatusBar *statusbar;
@@ -81,13 +82,15 @@ public:
     {
         if (window->objectName().isEmpty())
             window->setObjectName(QString::fromUtf8("window"));
-        window->resize(938, 599);
+        window->resize(921, 624);
         centralwidget = new QWidget(window);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         horizontalLayout = new QHBoxLayout(centralwidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         widget_2 = new QWidget(centralwidget);
         widget_2->setObjectName(QString::fromUtf8("widget_2"));
+        widget_2->setMinimumSize(QSize(200, 0));
+        widget_2->setMaximumSize(QSize(200, 16777215));
         formLayout = new QFormLayout(widget_2);
         formLayout->setObjectName(QString::fromUtf8("formLayout"));
         formLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
@@ -192,6 +195,7 @@ public:
 
         stopButton = new QPushButton(widget_2);
         stopButton->setObjectName(QString::fromUtf8("stopButton"));
+        stopButton->setEnabled(false);
 
         formLayout->setWidget(9, QFormLayout::FieldRole, stopButton);
 
@@ -202,28 +206,37 @@ public:
         label_7 = new QLabel(widget_2);
         label_7->setObjectName(QString::fromUtf8("label_7"));
 
-        formLayout->setWidget(12, QFormLayout::LabelRole, label_7);
+        formLayout->setWidget(13, QFormLayout::LabelRole, label_7);
 
         resultAprox = new QLineEdit(widget_2);
         resultAprox->setObjectName(QString::fromUtf8("resultAprox"));
+        resultAprox->setMaximumSize(QSize(70, 16777215));
 
-        formLayout->setWidget(12, QFormLayout::FieldRole, resultAprox);
+        formLayout->setWidget(13, QFormLayout::FieldRole, resultAprox);
 
         label_9 = new QLabel(widget_2);
         label_9->setObjectName(QString::fromUtf8("label_9"));
 
-        formLayout->setWidget(13, QFormLayout::LabelRole, label_9);
+        formLayout->setWidget(14, QFormLayout::LabelRole, label_9);
 
         resultBee = new QLineEdit(widget_2);
         resultBee->setObjectName(QString::fromUtf8("resultBee"));
+        resultBee->setMaximumSize(QSize(70, 16777215));
 
-        formLayout->setWidget(13, QFormLayout::FieldRole, resultBee);
+        formLayout->setWidget(14, QFormLayout::FieldRole, resultBee);
+
+        label_10 = new QLabel(widget_2);
+        label_10->setObjectName(QString::fromUtf8("label_10"));
+
+        formLayout->setWidget(12, QFormLayout::LabelRole, label_10);
 
 
         horizontalLayout->addWidget(widget_2);
 
         widget_3 = new QWidget(centralwidget);
         widget_3->setObjectName(QString::fromUtf8("widget_3"));
+        widget_3->setMinimumSize(QSize(200, 0));
+        widget_3->setMaximumSize(QSize(300, 16777215));
         verticalLayout = new QVBoxLayout(widget_3);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         problem = new QTableWidget(widget_3);
@@ -256,10 +269,10 @@ public:
         widget->setObjectName(QString::fromUtf8("widget"));
         verticalLayout_2 = new QVBoxLayout(widget);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        graphicsView = new QGraphicsView(widget);
-        graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
+        qwtPlot = new QwtPlot(widget);
+        qwtPlot->setObjectName(QString::fromUtf8("qwtPlot"));
 
-        verticalLayout_2->addWidget(graphicsView);
+        verticalLayout_2->addWidget(qwtPlot);
 
 
         horizontalLayout->addWidget(widget);
@@ -267,7 +280,7 @@ public:
         window->setCentralWidget(centralwidget);
         menubar = new QMenuBar(window);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 938, 21));
+        menubar->setGeometry(QRect(0, 0, 921, 21));
         menuStart = new QMenu(menubar);
         menuStart->setObjectName(QString::fromUtf8("menuStart"));
         window->setMenuBar(menubar);
@@ -292,17 +305,18 @@ public:
     void retranslateUi(QMainWindow *window)
     {
         window->setWindowTitle(QApplication::translate("window", "window", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("window", "Rozmiat plecaka", 0, QApplication::UnicodeUTF8));
-        label_8->setText(QApplication::translate("window", "Ilo\305\233\304\207 przedmiot\303\263w", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("window", "Maksymalna waga jednego elementu", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("window", "Maksymalna cena jednego elementu", 0, QApplication::UnicodeUTF8));
+        label->setText(QApplication::translate("window", "Rozmiat plecaka:", 0, QApplication::UnicodeUTF8));
+        label_8->setText(QApplication::translate("window", "Ilo\305\233\304\207 przedmiot\303\263w:", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("window", "Maksymalna waga:", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("window", "Maksymalna cena:", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("window", "Liczba skaut\303\263w:", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("window", "Liczba robotnic:", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("window", "Ilo\305\233\304\207 iteracji:", 0, QApplication::UnicodeUTF8));
         startButton->setText(QApplication::translate("window", "Start", 0, QApplication::UnicodeUTF8));
         stopButton->setText(QApplication::translate("window", "Stop", 0, QApplication::UnicodeUTF8));
-        label_7->setText(QApplication::translate("window", "Wynik algorytmu aproksymacyjnego", 0, QApplication::UnicodeUTF8));
-        label_9->setText(QApplication::translate("window", "Wynika algorytmu pszczelego", 0, QApplication::UnicodeUTF8));
+        label_7->setText(QApplication::translate("window", "aproksymacyjnego", 0, QApplication::UnicodeUTF8));
+        label_9->setText(QApplication::translate("window", "pszczelego", 0, QApplication::UnicodeUTF8));
+        label_10->setText(QApplication::translate("window", "Wyniki dla algorytmu", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem = problem->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("window", "Cena", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem1 = problem->horizontalHeaderItem(1);

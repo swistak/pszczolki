@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>938</width>
-    <height>599</height>
+    <width>921</width>
+    <height>624</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,6 +17,18 @@
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QWidget" name="widget_2" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>200</width>
+        <height>16777215</height>
+       </size>
+      </property>
       <layout class="QFormLayout" name="formLayout">
        <property name="fieldGrowthPolicy">
         <enum>QFormLayout::ExpandingFieldsGrow</enum>
@@ -24,7 +36,7 @@
        <item row="0" column="0">
         <widget class="QLabel" name="label">
          <property name="text">
-          <string>Rozmiat plecaka</string>
+          <string>Rozmiat plecaka:</string>
          </property>
         </widget>
        </item>
@@ -41,7 +53,7 @@
        <item row="1" column="0">
         <widget class="QLabel" name="label_8">
          <property name="text">
-          <string>Ilość przedmiotów</string>
+          <string>Ilość przedmiotów:</string>
          </property>
         </widget>
        </item>
@@ -58,7 +70,7 @@
        <item row="2" column="0">
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Maksymalna waga jednego elementu</string>
+          <string>Maksymalna waga:</string>
          </property>
         </widget>
        </item>
@@ -78,7 +90,7 @@
        <item row="3" column="0">
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>Maksymalna cena jednego elementu</string>
+          <string>Maksymalna cena:</string>
          </property>
         </widget>
        </item>
@@ -202,31 +214,64 @@
          </property>
         </spacer>
        </item>
-       <item row="12" column="0">
+       <item row="13" column="0">
         <widget class="QLabel" name="label_7">
          <property name="text">
-          <string>Wynik algorytmu aproksymacyjnego</string>
-         </property>
-        </widget>
-       </item>
-       <item row="12" column="1">
-        <widget class="QLineEdit" name="resultAprox"/>
-       </item>
-       <item row="13" column="0">
-        <widget class="QLabel" name="label_9">
-         <property name="text">
-          <string>Wynika algorytmu pszczelego</string>
+          <string>aproksymacyjnego</string>
          </property>
         </widget>
        </item>
        <item row="13" column="1">
-        <widget class="QLineEdit" name="resultBee"/>
+        <widget class="QLineEdit" name="resultAprox">
+         <property name="maximumSize">
+          <size>
+           <width>70</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="0">
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>pszczelego</string>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="1">
+        <widget class="QLineEdit" name="resultBee">
+         <property name="maximumSize">
+          <size>
+           <width>70</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="0">
+        <widget class="QLabel" name="label_10">
+         <property name="text">
+          <string>Wyniki dla algorytmu</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
     </item>
     <item>
      <widget class="QWidget" name="widget_3" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>300</width>
+        <height>16777215</height>
+       </size>
+      </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QTableWidget" name="problem">
@@ -262,7 +307,7 @@
      <widget class="QWidget" name="widget" native="true">
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QGraphicsView" name="graphicsView"/>
+        <widget class="QwtPlot" name="qwtPlot"/>
        </item>
       </layout>
      </widget>
@@ -274,7 +319,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>938</width>
+     <width>921</width>
      <height>21</height>
     </rect>
    </property>
@@ -287,6 +332,13 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QwtPlot</class>
+   <extends>QFrame</extends>
+   <header>qwt_plot.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>KBagSize</tabstop>
   <tabstop>KMaxWeight</tabstop>
