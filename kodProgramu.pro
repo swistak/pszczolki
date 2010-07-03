@@ -10,4 +10,6 @@ LIBS += -lqwt-qt4
 HEADERS += beesAlgorithm.h common.h element.h knapsackProblem.h ui_window.h window.h BackgroundBee.h incrementalplot.h
 INTERFACES += window.ui
 SOURCES += beesAlgorithm.cpp element.cpp knapsackProblem.cpp start.cpp window.cpp BackgroundBee.cpp incrementalplot.cpp
-CONFIG += thread
+CONFIG += qt thread
+
+TARGET = pszczolki
