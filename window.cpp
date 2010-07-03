@@ -75,6 +75,8 @@ void window::updateProgress(int currentProgress, int currentPrice) {
 }
 
 void window::updateResults(double aprox, double bee) {
+  working = false;
+  
   widget.resultAprox->setText(d2s(aprox));
   widget.resultBee->setText(d2s(bee));
   widget.startButton->setEnabled(true);

@@ -114,18 +114,18 @@ void IncrementalPlot::appendData(double *x, double *y, int size)
 
 void IncrementalPlot::resizeIfNeeded(int x, int y) {
   bool changed = false;
-    if (x > maxX) {
-      maxX = maxX * 2;
-      setAxisScale(xBottom, 0, maxX);
+    while (x > maxX) {
+      maxX = maxX + 100;
       changed = true;
     }
 
-    if (y > maxY) {
-      maxY = maxY * 2;
-      setAxisScale(yLeft, 0, maxY);
+    while (y > maxY) {
+      maxY = maxY + 100;
       changed = true;
     }
   if (changed) {
+    setAxisScale(yLeft, 0, maxY);
+    setAxisScale(xBottom, 0, maxX);
     replot();
   }
 }
